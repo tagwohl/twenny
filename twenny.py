@@ -7,8 +7,9 @@ class twenny(object):
         self.timer = rumps.Timer(self.ticker, 1)
         self.interval = 1200
         self.bau_menu()
-        self.start_button = rumps.MenuItem(title="Start Timer", callback=self.start_timer)
-        self.app.menu = [self.start_button]
+        self.start_knopf = rumps.MenuItem(title="Start Timer", callback=self.start_timer)
+        self.stopuhr = rumps.MenuItem(title="20:00")
+        self.app.menu = [self.stopuhr, self.start_knopf]
 
     def bau_menu(self):
         self.timer.count = 0
@@ -25,8 +26,8 @@ class twenny(object):
             rumps.notification(title="twenny", subtitle="You can continue working now!", message='')
             ticker()
         else:
-            self.start_button.set_callback(None)
-            self.app.title = '{:2d}:{:02d}'.format(mins, secs)
+            self.start_knopf.set_callback(None)
+            self.stopuhr.title = '{:2d}:{:02d}'.format(mins, secs)
         zaehler.count += 1
 
 
@@ -35,8 +36,6 @@ class twenny(object):
             self.timer.end = self.interval
             self.timer.start()
 
-    def stop_timer(self):
-        self.app.title = "👁️"
 
     def run(self):
         self.app.run()
