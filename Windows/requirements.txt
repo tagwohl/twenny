@@ -1,1 +1,1 @@
-pip install win10toast
+win10toast
